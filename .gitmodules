@@ -1,0 +1,9 @@
+[submodule "firmware/c_cpp/pico-sdk"]
+	path = firmware/c_cpp/pico-sdk
+	url = https://github.com/raspberrypi/pico-sdk
+[submodule "firmware/micropython/pimoroni-pico"]
+	path = firmware/micropython/pimoroni-pico
+	url = https://github.com/pimoroni/pimoroni-pico
+[submodule "firmware/micropython/micropython"]
+	path = firmware/micropython/micropython
+	url = https://github.com/micropython/micropython.git
