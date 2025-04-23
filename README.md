@@ -1,5 +1,5 @@
 
-# HLab
+# H-Lab
 
 **Laboratório educacional de sistemas embarcados HwIT**
 
@@ -58,7 +58,7 @@ Para usuários avançados que desejam utilizar todo o poder do processador RP204
 Todas as versões BitDogLab estão sob a licença CERN Open Hardware Licence Version 2 - Strongly Reciprocal [![License: CERN-OHL-S v2.0](https://img.shields.io/badge/License-CERN--OHL--S%20v2.0-blue.svg)](https://cern.ch/cern-ohl).
 Para mais detalhes veja o arquivo `LICENSE`.
 
-Os demais hardwares periféricos e a futura placa HLab est!ao sob a licença MIT [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT). Para mais detalhes veja o arquivo `LICENSE`.
+Os demais hardwares periféricos e a futura placa H-Lab estão sob a licença MIT [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT). Para mais detalhes veja o arquivo `LICENSE`.
 
 # Estrutura do Repositório
 
@@ -67,9 +67,15 @@ Segue abaixo a estrutura de arquivos desse repositório.
 O repositório se divide em firmware (código que controla o processador principal da BitDogLab/HLab) contendo tanto código micropython (usuários básicos) quanto c/c++ (usuários avançados), seguido do hardware eletrônico que contém as informações de todas as placas (principal, painel frontal e periféricos), seguido software contendo informações e código para plataforma low code, mecânica contendo peças e partes mecânicas de suporte ao hardware, e fechando com a pasta educacional contendo informações e material para treinamento de professores, instruturoes e alunos.
 
 ```bash
+├───education "Arquivos e documentação para treinamentos e aprendizado"
+│   ├───teacher "Materiais de treinamento para professores"
+│   ├───instructor "Materiais de treinamento para instrutores"
+│   └───student "Aulas para estudantes"
 ├───firmware "Nesta pasta ficam os arquivos do firmware, seja micropython ou c/c++"
 │   └───micropython "Interpretador (arquivos fonte e uf2 para carregarmos na Pi Pico) e todos exemplos"
 │       ├───micropython "Código fonte e compilado do interpretador micropython"
+│       ├───pimoroni-pico "Código fonte pimoroni-pico, contendo bilbiotecas e micropython"
+│       ├───releases "firmware compilado micropython"
 │       └───examples "Arquivos de exemplo de firmware incluindo codigo fonte e documentação"
 │   └───c_cpp "Aqui ficam os arquivos do SDK (submodule) e todos os exemplos"
 │       ├───pico_sdk "Link simbolico para SDK"
@@ -87,15 +93,11 @@ O repositório se divide em firmware (código que controla o processador princip
 │       ├───pcb "Arquivos de fabricação do PCB"
 │       ├───3D "Arquivos 3D dos componentes da placa"
 │       └───electronics "Datasheets e documentação de projeto"
-└───software "Softwares de auxilio ao uso da plataforma"
-│   └───low_code "Ferramenta de programação em blocos (low code), codigo fonte, biblioteca e documentos"
-└───mechanics "Modelos mecânicos para uso com placas da plataforma"
+├───mechanics "Modelos mecânicos para uso com placas da plataforma"
 │   ├───main_mech "Partes mecanicas para uso com a placa principal"
 │   └───peripherals_mech "Partes mecanicas para uso com os periféricos"
-└───education "Arquivos e documentação para treinamentos e aprendizado"
-│   ├───teacher "Materiais de treinamento para professores"
-│   ├───instructor "Materiais de treinamento para instrutores"
-│   └───student "Aulas para estudantes"
+└───software "Softwares de auxilio ao uso da plataforma"
+│   └───low_code "Ferramenta de programação em blocos (low code), codigo fonte, biblioteca e documentos"
 ```
 
-# [Hardware Innovation Technologies (Campinas & Paulinia / SP / Brazil)](http://www.hwit.com.br/)
+# [Hardware Innovation Technologies](http://www.hwit.com.br/)
