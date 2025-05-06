@@ -1,6 +1,8 @@
 
 # HLab Firmware
 
-TBD
+- [Desenvolvimento de firmware em C/C++](./c_cpp/)
+- [Desenvolvimento de firmware em Micropython](./micropython/)
 
-#### Sponsor: [Hardware Innovation Technologies (Paulinia/SP/Brazil)](http://www.hwit.com.br/)
+
+# [Hardware Innovation Technologies ](http://www.hwit.com.br/)
