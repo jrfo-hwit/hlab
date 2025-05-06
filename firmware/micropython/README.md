@@ -27,15 +27,15 @@ No caso do programa embarcatech oriundos do [Ministério da Ciência e Tecnologi
 
 A bitdoglab vem uma caixa padrão de correio (16x11x5 cm) como a ilustrada abaixo.
 
-<img src="./illustrations/box.png" width=40% height=40%>
+<img src="./illustrations/box.png" width=50% height=50%>
 
 Dentro da caixa você encontra a BitDogLab envolta em um envelope anti-estático e um cabo tipo micro-usb para usb-a.
 
-<img src="./illustrations/open-box.png" width=40% height=40%>
+<img src="./illustrations/open-box.png" width=50% height=50%>
 
 Cabo tipo micro-usb para usb-a
 
-<img src="./illustrations/microusb-usba.png" width=25% height=25%>
+<img src="./illustrations/microusb-usba.png" width=50% height=50%>
 
 ## Abrindo a BitDogLab
 
@@ -75,7 +75,7 @@ O módulo Microcontrolador é o cérebro da placa, composto pelo microcontrolado
 
 Pinout Raspberry Pi Pico W
 
-<img src="./illustrations/picow-pinout.svg" width=80% height=80%>
+<img src="./illustrations/picow-pinout.svg">
 
 Lista de periféricos embarcados na placa BitDogLab:
 
@@ -85,33 +85,33 @@ Lista de periféricos embarcados na placa BitDogLab:
 
 2) LED Colorido (SMD5050 RGB LEDs ROHS)
 
-<img src="./illustrations/led-rgb.png" width=25% height=25%>
+<img src="./illustrations/led-rgb.png" width=50% height=50%>
 
 3) Display OLED (0.96 polegadas I2C 128x64 oled display)
 
-<img src="./illustrations/oled.png" width=25% height=25%>
+<img src="./illustrations/oled.png" width=50% height=50%>
 
 4) Matriz de LEDs coloridos (LED-RGB 5x5 5050 WS2812)
 
-<img src="./illustrations/led-rgb-array.png" width=30% height=30%>
+<img src="./illustrations/led-rgb-array.png" width=50% height=50%>
 
 5) Microfone com amplificador de áudio (MAX4466EXK)
 
-<img src="./illustrations/mic.png" width=25% height=25%>
+<img src="./illustrations/mic.png" width=50% height=50%>
 
 6) Joystick Analógico (Plugin 13x13mm Multi-Dir ROHS)
 
-<img src="./illustrations/analog-joystick.png" width=25% height=25%>
+<img src="./illustrations/analog-joystick.png" width=50% height=50%>
 
 7) Botões (A e B) - Chave Táctil 12x12x7.5 mm
 
-<img src="./illustrations/buttons.png" width=60% height=60%>
+<img src="./illustrations/buttons.png">
 
-8) Buzzers (Esquerdo e Direito) - 80dB Externally Driven Magnetic 2.7kHz SMD, 8.5x8.5mm Buzzers ROHS
+1) Buzzers (Esquerdo e Direito) - 80dB Externally Driven Magnetic 2.7kHz SMD, 8.5x8.5mm Buzzers ROHS
 
-<img src="./illustrations/stereo-buzzers.png" width=60% height=60%>
+<img src="./illustrations/stereo-buzzers.png">
 
-9) Conectores de sensores de expansão I2C (1 e 0) - 2.5mm Plugin,P=2.5mm Wire To Board Connector ROHS
+1) Conectores de sensores de expansão I2C (1 e 0) - 2.5mm Plugin,P=2.5mm Wire To Board Connector ROHS
 - I2C1 (pino 1 – esquerda)
 	- 1: GP3 (SCL I2C1)
 	- 2: GP2 (SDA I2C1)
@@ -123,11 +123,11 @@ Lista de periféricos embarcados na placa BitDogLab:
 	- 3: 3.3V
 	- 4: GND referencia
 
-<img src="./illustrations/i2c-sensor-actuator.png" width=50% height=50%>
+<img src="./illustrations/i2c-sensor-actuator.png">
 
 1)  Circuito de gerenciamento de energia - [BQ25622 da texas instruments](https://www.ti.com/product/BQ25622), carregador de bateria de célula simples com até 18V de tensão máxima de entrada, limitador de corrente, conversor analógico digital (ADC) embarcado para monitoração de parâmetros de carregamento e descarregamento de baterias, e função on-the-go (OTG ou seja, é capaz de fornecer alimentação para algum dispositivo conectado no seu barramento USB), controlado por barramento i2c.
 
-<img src="./illustrations/battery-charger.png" width=25% height=25%>
+<img src="./illustrations/battery-charger.png" width=50% height=50%>
 
 11) Conector de expansão de GPIOs (pino 1 canto superior direito) - 2.54mm Straight Gold Brass 2x7P 7 Push - Pull P=2.54mm IDC Connectors ROHS
 - 1: GND referencia
@@ -145,21 +145,21 @@ Lista de periféricos embarcados na placa BitDogLab:
 - 13: GND referência/GP14 (depende da configuração de jumpers no esquemático)
 - 14: GP18
 
-<img src="./illustrations/idc-connector.png" width=20% height=20%>
+<img src="./illustrations/idc-connector.png" width=50% height=50%>
 
 12) Botão de reset - 8mm Round Button Brick nogging SPST SMD Tactile Switches ROHS
 
-<img src="./illustrations/reset-button.png" width=25% height=25%>
+<img src="./illustrations/reset-button.png" width=50% height=50%>
 
 13) Conector para painel solar (6V) - 1x2P -40℃~+105℃ 8A 130V Green 18~26 Straight 2.54mm 0.5~1 1 2 Plugin,P=2.54mm Screw terminal ROHS
 
-<img src="./illustrations/solar-extbat-conn.png" width=35% height=35%>
+<img src="./illustrations/solar-extbat-conn.png" width=50% height=50%>
 
 14) Conector para bateria externa - 1x2P -40℃~+105℃ 8A 130V Green 18~26 Straight 2.54mm 0.5~1 1 2 Plugin,P=2.54mm Screw terminal ROHS
 
 15) Chave liga-desliga do lado direito da bateria (chave deslizante deslocada no sentido de + ou seja para baixo liga, e no sentido inverso ou seja para cima desliga)
 
-<img src="./illustrations/battery.png" width=40% height=40%>
+<img src="./illustrations/battery.png" width=50% height=50%>
 
 1)  Pinos e expansão para painel compatível com garras jacaré ou parafusos (1x5 header esquerdo e direito, cor preta)
 - 1x5 header esquerdo J5 (pino 5 na esquerda, pino 1 na direita):
@@ -175,15 +175,15 @@ Lista de periféricos embarcados na placa BitDogLab:
 	- 2: GP2
 	- 1: GP3
 
-<img src="./illustrations/expansion-pins.png" width=60% height=60%>
+<img src="./illustrations/expansion-pins.png">
 
 O painel frontal acima embarca um conectore 1x6 header em configuração compatível com módulo bluetooth [HC-05](https://www.makerhero.com/blog/tutorial-arduino-bluetooth-hc-05-mestre/) (módulo que possui uma maior facilidade de uso devido a exemplos disponíveis na comunidade)
 
-<img src="./illustrations/i2c-ext-pin.png" width=60% height=60%>
+<img src="./illustrations/i2c-ext-pin.png">
 
 1)  Jumper de seleção de conversor analógico digital (pino ANA-IN no painel jacaré ou microfone), pino 1 indicado com marcação J1
 
-<img src="./illustrations/jumper-analog-in.png" width=40% height=40%>
+<img src="./illustrations/jumper-analog-in.png" width=50% height=50%>
 
 ## Programando BitDogLab
 
@@ -221,17 +221,17 @@ Com essa configuração finalizada, está na hora de gravar o firmware do interp
 
 :warning: Uma alternativa para evitar plugar e desplugar o cabo usb várias vezes é apenas deixar o cabo sempre plugado, e segurar o BOOTSEL primeiro, apertar o botão de reset por 1 segundo e após soltar o botão de reset, soltar em seguida o BOOTSEL.
 
-<img src="./illustrations/usb-conn-ok.png" width=40% height=40%>
+<img src="./illustrations/usb-conn-ok.png" width=50% height=50%>
 
-<img src="./illustrations/bootsel.png" width=40% height=40%>
+<img src="./illustrations/bootsel.png" width=50% height=50%>
 
-<img src="./illustrations/bootsel-animation.gif" width=40% height=40%>
+<img src="./illustrations/bootsel-animation.gif" width=50% height=50%>
 
-<img src="./illustrations/bootsel-pressed.png" width=40% height=40%>
+<img src="./illustrations/bootsel-pressed.png" width=50% height=50%>
 
 Esse procedimento faz com que a placa entre em modo de gravação de firmware e seja reconhecida como um disco removível. Inclusive você também poderá vê-la no diretório de discos do seu computador, como nesta imagem.
 
-<img src="./illustrations/RPI-RP2.png" width=25% height=25%>
+<img src="./illustrations/RPI-RP2.png" width=50% height=50%>
 
 Neste momento, realize o drag and drop direto (ou ctrl+c e ctrl+v) do arquivo de firmware baixado no disco montado RPI-RP2 no seu computador.
 
