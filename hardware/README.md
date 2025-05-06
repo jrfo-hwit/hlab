@@ -8,7 +8,7 @@ Basicamente com relação ao bitdoglab, suportamos a evolução da placa a parti
 * bitdoglab 5.3 [esquemático](./main_hw/bitdoglab_v5_3_smd.pdf) e [código fonte (Kicad)](./main_hw/bitdoglab_v5_3_smd/)
 * bitdoglab 6.0 [esquemático](./main_hw/bitdoglab_v6_0_smd.pdf)
 * bitdoglab 6.2 [esquemático](./main_hw/bitdoglab_v6_2_smd.pdf)
-* bitdoglab 6.3 - versão embarcatech [esquemático](./main_hw/bitdoglab_v6_3_smd.pdf)
+* bitdoglab 6.3 - versão embarcatech [esquemático](./main_hw/bitdoglab_v6_3_smd-embarcatech.pdf)
 * bitdoglab 6.4 [esquemático](./main_hw/bitdoglab_v6_4_main.pdf)
 
 Os arquivos esquemáticos da placa do painel frontal se encontra na pasta front_panel_hw e no seguinte [link](./front_panel_hw/bitdoglab_v6_4_painel.pdf).
