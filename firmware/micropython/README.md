@@ -1,5 +1,7 @@
 # Iniciando com Micropython
 
+Caso queira aprender a compilar o firmware micropyhton com todas as bibliotecas embutidas, favor seguir para o guia [Compiling_FW](./Compiling_FW.md)
+
 **Table of Contents**
 
 - [[PT-BR] Manual BitDogLab (Iniciando com Micropython)](#iniciando-com-micropython))
