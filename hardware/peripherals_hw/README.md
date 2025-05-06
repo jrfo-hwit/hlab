@@ -1,7 +1,7 @@
 
 # Hardware Periféricos
 
-Essa pasta apresenta detalhes sobre todos os periféricos desenvolvidos para segunda fase do programa [Embarcatech](https://embarcatech.softex.br/), Os periférics são compostos pelos seguintes componentes:
+Essa pasta apresenta detalhes sobre todos os periféricos desenvolvidos para segunda fase do programa [Embarcatech](https://embarcatech.softex.br/), Os periféricos são compostos pelos seguintes componentes:
 
 * Kit Básico de Periféricos (12 itens)
   * Periferico adaptador de sensores/atuadores

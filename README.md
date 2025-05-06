@@ -9,7 +9,7 @@ Este repositório contem todas as informações das evoluções executadas pela 
 
 ## Placa principal
 
-Além da placa principal (main_hw), existe a placa do painel frontal de conexão (front_panel_hw) compondo a solução [BitDogLab](https://github.com/Fruett/BitDogLab).
+Além da placa principal [main_hw](./hardware/main_hw/bitdoglab_v6_4_main.pdf), existe a placa do painel frontal de conexão [front_panel_hw](./hardware/front_panel_hw/bitdoglab_v6_4_painel.pdf) compondo a solução [BitDogLab](https://github.com/Fruett/BitDogLab).
 
 ## Placas periféricas
 
@@ -38,6 +38,7 @@ Esse repositório apresenta os periféricos desenvolvidos para segunda fase do p
   * Periférico comunicação radio de longa distância LoRA (SPI)
   * Periférico GPS (UART)
   * Periférico Pi Pico debug probe (SWD)
+* Gerenciador de bateria bq25622 (i2c, embarcado na placa principal)
 
 :warning: Acesse esse [link](https://github.com/jrfo-hwit/hlab/tree/main/hardware/peripherals_hw) para obter maiores detalhes sobre cada um dos periféricos
 
@@ -47,7 +48,7 @@ A Placa HLab 1.0 vai integrar a placa principal com o painel frontal, e será ev
 
 :warning: Esse repositório contém firmwares do interpretador micropython compilado para RP2040 (Pi Pico e Pi Pico W) contida na placa principal, [acesse aqui os últimos releases](https://github.com/jrfo-hwit/hlab/tree/main/firmware/micropython/releases). Esse firmware contém além do micropython todas as bibliotecas necessárias para interagir com a placa principal e seus respectivos periféricos.
 
-**A maneira mais fácil de começar se você é iniciante com a plataforma, é por meio da leitura do nosso [guia do iniciante](https://github.com/jrfo-hwit/hlab/tree/main/firmware/micropython/guia-do-iniciante.md).**
+**A maneira mais fácil de começar se você é iniciante com a plataforma, é por meio da leitura do nosso [guia do iniciante](./firmware/micropython/README.md).**
 
 ## C/C++
 
