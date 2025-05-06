@@ -27,6 +27,8 @@ Essa pasta apresenta detalhes sobre todos os periféricos desenvolvidos para seg
   * [Periférico Pi Pico debug probe (SWD)](#perif%C3%A9rico-pi-pico-debug-probe-swd)
   * [Periférico de extensão de conexões (SPI)](#perif%C3%A9rico-de-extens%C3%A3o-de-conex%C3%B5es-spi)
 
+* Gerenciador de bateria bq25622 (i2c, embarcado na placa principal)
+
 ## Sensor: Acelerômetro (i2c)
 
 O acelerômetro [MPU-6500](https://invensense.tdk.com/products/motion-tracking/6-axis/mpu-6500/) da empresa TDK InvenSense, é a segunda geração do dispositivo de rastreio de movimento (*MotionTracking*) para smartphones, tablets, sensores vestíveis e outros mercados de consumo. O chip MPU-6500 integra um acelerômetro de 3-eixos, um giroscópio de 3-eixos (com 16-bit ADC e condicionamento de sinal cada) e um processador de movimento digital. É o primeiro sensor do mundo a operar em 1,8V consumindo 6,1mW em modo completo de operação. O chip incorpora um giroscópio com performance de apenas +/-5 dps *zero-rate-output* e 0,01 dps/sqrt(Hz) de ruído, com especificação de acelerômetro com offset de +/- 60mg, 300ug/sqrt(Hz) de ruído, e 18uA de corrente de consumo no modo de baixo consumo (*low-power*).
