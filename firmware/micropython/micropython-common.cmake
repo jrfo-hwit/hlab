@@ -42,6 +42,8 @@ endif()
 
 include(modules_py/modules_py)
 
+include(modules_py/modules_py)
+
 # Most board specific ports wont need all of these
 # copy_module(gfx_pack.py)
 # copy_module(interstate75.py)
