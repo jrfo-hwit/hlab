@@ -7,3 +7,6 @@
 [submodule "firmware/micropython/micropython"]
 	path = firmware/micropython/micropython
 	url = https://github.com/micropython/micropython.git
+[submodule "firmware/c_cpp/debugprobe"]
+	path = firmware/c_cpp/debugprobe
+	url = https://github.com/raspberrypi/debugprobe
