@@ -40,6 +40,7 @@
         "-DPICO_COPY_TO_RAM=1"
     ],
     "files.associations": {
-        "multicore.h": "c"
+        "multicore.h": "c",
+        "stdlib.h": "c"
     }
 }

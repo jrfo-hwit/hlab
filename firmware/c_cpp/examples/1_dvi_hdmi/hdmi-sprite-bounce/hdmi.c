@@ -21,11 +21,11 @@
 #include "sprite.h"
 
 // Pick one:
-// #define MODE_640x480_60Hz
+ #define MODE_640x480_60Hz
 // #define MODE_800x480_60Hz
-// #define MODE_800x600_60Hz
-#define MODE_960x540p_60Hz
-// #define MODE_1280x720_30Hz
+//#define MODE_800x600_60Hz
+//#define MODE_960x540p_60Hz
+//#define MODE_1280x720_30Hz
 
 #include "./assets/raspberry_128x128_rgab5515.h"
 #include "./assets/hwit_128x128_rgab5515.h"
@@ -70,7 +70,7 @@
 #error "Select a video mode!"
 #endif
 
-#define N_BERRIES 65
+#define N_BERRIES 20
 #define LED_PIN 11
 
 /*
@@ -122,7 +122,7 @@ void __not_in_flash("render") render_loop() {
 			uint16_t *pixbuf;
 			queue_remove_blocking(&dvi0.q_colour_free, &pixbuf);
 			// sprite_blit16(pixbuf, (const uint16_t *)testcard_320x240 + (y + frame_ctr / 2) % 240 * FRAME_WIDTH, 320);
-			sprite_fill16(pixbuf, 0x07ff, FRAME_WIDTH);
+			sprite_fill16(pixbuf, 0xFFFF, FRAME_WIDTH); //background
 			for (int i = 0; i < N_BERRIES; ++i)
 				// sprite_asprite16(pixbuf, &berry[i], atrans[i], y, FRAME_WIDTH);
 				sprite_sprite16(pixbuf, &berry[i], y, FRAME_WIDTH);
