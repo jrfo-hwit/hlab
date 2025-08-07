@@ -1,0 +1,73 @@
+# Generated Cmake Pico project file
+
+cmake_minimum_required(VERSION 3.13)
+
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Initialise pico_sdk from installed location
+# (note this can come from environment, CMake cache etc)
+
+# == DO NOT EDIT THE FOLLOWING LINES for the Raspberry Pi Pico VS Code Extension to work ==
+if(WIN32)
+    set(USERHOME $ENV{USERPROFILE})
+else()
+    set(USERHOME $ENV{HOME})
+endif()
+set(sdkVersion 2.1.1)
+set(toolchainVersion 14_2_Rel1)
+set(picotoolVersion 2.1.1)
+set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
+if (EXISTS ${picoVscode})
+    include(${picoVscode})
+endif()
+# ====================================================================================
+set(PICO_BOARD pico_w CACHE STRING "Board type")
+
+# Pull in Raspberry Pi Pico SDK (must be before project)
+include(pico_sdk_import.cmake)
+
+project(st7789_pio_lcd_lvgl C CXX ASM)
+
+# Initialise the Raspberry Pi Pico SDK
+pico_sdk_init()
+
+# Add executable. Default name is the project name, version 0.1
+
+add_executable(st7789_pio_lcd_lvgl main.c st7789_lcd_pio.c)
+
+pico_generate_pio_header(st7789_pio_lcd_lvgl ${CMAKE_CURRENT_LIST_DIR}/st7789_lcd.pio)
+
+target_sources(st7789_pio_lcd_lvgl PRIVATE main.c st7789_lcd_pio.c)
+
+pico_set_program_name(st7789_pio_lcd_lvgl "st7789_pio_lcd_lvgl")
+pico_set_program_version(st7789_pio_lcd_lvgl "0.1")
+
+# Modify the below lines to enable/disable output over UART/USB
+pico_enable_stdio_uart(st7789_pio_lcd_lvgl 1)
+pico_enable_stdio_usb(st7789_pio_lcd_lvgl 0)
+
+# Add the standard library to the build
+target_link_libraries(st7789_pio_lcd_lvgl
+        pico_stdlib hardware_pio hardware_interp)
+
+# Add the standard include files to the build
+target_include_directories(st7789_pio_lcd_lvgl PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}
+)
+
+add_subdirectory(lvgl) # jrfo - added
+set(LV_LVGL_H_SIMPLE_INCLUDE ON) # jrfo - added
+set(LV_CONF_INCLUDE_SIMPLE ON) # jrfo - added
+add_subdirectory(ui) # jrfo - added
+
+# Add any user requested libraries
+target_link_libraries(st7789_pio_lcd_lvgl
+        pico_cyw43_arch_none 
+        lvgl
+        ui
+        )
+
+pico_add_extra_outputs(st7789_pio_lcd_lvgl)
+
