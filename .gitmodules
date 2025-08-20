@@ -13,3 +13,6 @@
 [submodule "firmware/c_cpp/examples/2_LCD_pio_LVGL_img_slider_button/st7789_pio_lcd_lvgl/lvgl"]
 	path = firmware/c_cpp/examples/2_LCD_pio_LVGL_img_slider_button/st7789_pio_lcd_lvgl/lvgl
 	url = https://github.com/jrfo-hwit/lvgl-pi-pico
+[submodule "firmware/c_cpp/examples/9_st7789_pio_lcd_lvgl_hum_temp/st7789_pio_lcd_lvgl_sens/lvgl"]
+	path = firmware/c_cpp/examples/9_st7789_pio_lcd_lvgl_hum_temp/st7789_pio_lcd_lvgl_sens/lvgl
+	url = https://github.com/jrfo-hwit/lvgl-pi-pico
