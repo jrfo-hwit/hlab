@@ -11,7 +11,7 @@
 #elif defined(LV_BUILD_TEST)
 #include "../lvgl.h"
 #else
-#include "../lvgl/lvgl.h" // For LVGL functions and types
+#include "lvgl/lvgl.h"
 #endif
 
 

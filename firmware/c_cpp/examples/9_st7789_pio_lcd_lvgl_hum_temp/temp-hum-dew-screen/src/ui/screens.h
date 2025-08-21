@@ -1,7 +1,7 @@
 #ifndef EEZ_LVGL_UI_SCREENS_H
 #define EEZ_LVGL_UI_SCREENS_H
 
-#include "../lvgl/lvgl.h" // For LVGL functions and types
+#include <lvgl/lvgl.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -15,11 +15,11 @@ typedef struct _objects_t {
     lv_obj_t *humd_label;
     lv_obj_t *humd_arc;
     lv_obj_t *humd_val;
-    lv_obj_t *dew_label;
     lv_obj_t *dew_val;
     lv_obj_t *temp_img;
     lv_obj_t *humd_img;
     lv_obj_t *hwit_img;
+    lv_obj_t *dew_label;
 } objects_t;
 
 extern objects_t objects;

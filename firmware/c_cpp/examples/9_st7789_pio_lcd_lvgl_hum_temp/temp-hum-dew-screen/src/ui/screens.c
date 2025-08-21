@@ -25,7 +25,7 @@ void create_screen_main() {
             // temp_label
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.temp_label = obj;
-            lv_obj_set_pos(obj, 22, 19);
+            lv_obj_set_pos(obj, 15, 19);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_label_set_text(obj, "Temperature");
         }
@@ -33,23 +33,27 @@ void create_screen_main() {
             // temp_arc
             lv_obj_t *obj = lv_arc_create(parent_obj);
             objects.temp_arc = obj;
-            lv_obj_set_pos(obj, 27, 49);
+            lv_obj_set_pos(obj, 19, 48);
             lv_obj_set_size(obj, 86, 94);
             lv_arc_set_value(obj, 25);
+            lv_obj_set_style_arc_color(obj, lv_color_hex(0xff500000), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_arc_color(obj, lv_color_hex(0xffff0000), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+            lv_obj_set_style_bg_color(obj, lv_color_hex(0xffff0000), LV_PART_KNOB | LV_STATE_DEFAULT);
         }
         {
             // temp_val
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.temp_val = obj;
-            lv_obj_set_pos(obj, 52, 89);
+            lv_obj_set_pos(obj, 18, 186);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "99.9C");
         }
         {
             // humd_label
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.humd_label = obj;
-            lv_obj_set_pos(obj, 218, 19);
+            lv_obj_set_pos(obj, 229, 19);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_label_set_text(obj, "Humidity");
         }
@@ -57,39 +61,34 @@ void create_screen_main() {
             // humd_arc
             lv_obj_t *obj = lv_arc_create(parent_obj);
             objects.humd_arc = obj;
-            lv_obj_set_pos(obj, 209, 50);
+            lv_obj_set_pos(obj, 219, 49);
             lv_obj_set_size(obj, 86, 94);
             lv_arc_set_value(obj, 25);
+            lv_obj_set_style_arc_color(obj, lv_color_hex(0xff2196f3), LV_PART_INDICATOR | LV_STATE_DEFAULT);
         }
         {
             // humd_val
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.humd_val = obj;
-            lv_obj_set_pos(obj, 234, 89);
+            lv_obj_set_pos(obj, 218, 186);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "99.9C");
-        }
-        {
-            // dew_label
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.dew_label = obj;
-            lv_obj_set_pos(obj, 122, 65);
-            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_label_set_text(obj, "Dew Point");
         }
         {
             // dew_val
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.dew_val = obj;
-            lv_obj_set_pos(obj, 141, 89);
+            lv_obj_set_pos(obj, 118, 186);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "99.9C");
         }
         {
             // temp_img
             lv_obj_t *obj = lv_image_create(parent_obj);
             objects.temp_img = obj;
-            lv_obj_set_pos(obj, 38, 153);
+            lv_obj_set_pos(obj, 30, 110);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_image_set_src(obj, &img_temperature);
         }
@@ -97,7 +96,7 @@ void create_screen_main() {
             // humd_img
             lv_obj_t *obj = lv_image_create(parent_obj);
             objects.humd_img = obj;
-            lv_obj_set_pos(obj, 222, 153);
+            lv_obj_set_pos(obj, 231, 110);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_image_set_src(obj, &img_humidity);
         }
@@ -105,9 +104,23 @@ void create_screen_main() {
             // hwit_img
             lv_obj_t *obj = lv_image_create(parent_obj);
             objects.hwit_img = obj;
-            lv_obj_set_pos(obj, 110, 149);
+            lv_obj_set_pos(obj, 113, 13);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_image_set_src(obj, &img_hwit);
+        }
+        {
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            lv_obj_set_pos(obj, 131, 110);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_image_set_src(obj, &img_dew);
+        }
+        {
+            // dew_label
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.dew_label = obj;
+            lv_obj_set_pos(obj, 125, 88);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_label_set_text(obj, "Dew Point");
         }
     }
     

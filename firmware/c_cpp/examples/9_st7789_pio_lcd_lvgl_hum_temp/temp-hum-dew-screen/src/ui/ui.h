@@ -1,7 +1,9 @@
 #ifndef EEZ_LVGL_UI_GUI_H
 #define EEZ_LVGL_UI_GUI_H
 
-#include "../lvgl/lvgl.h" // For LVGL functions and types
+#include <lvgl/lvgl.h>
+
+
 
 #if defined(EEZ_FOR_LVGL)
 #include <eez/flow/lvgl_api.h>
