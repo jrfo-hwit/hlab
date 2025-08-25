@@ -1,7 +1,7 @@
 #ifndef EEZ_LVGL_UI_GUI_H
 #define EEZ_LVGL_UI_GUI_H
 
-#include "../lvgl/lvgl.h" // Include LVGL header for UI events
+#include "../lvgl/lvgl.h" //changed from <../lvgl/lvgl.h>
 
 
 

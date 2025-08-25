@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[temp-hum-dew-screen.eez-project]:/userPages/0",
+    "selectedUserPageObject": "[temp-hum-dew-screen.eez-project]:/userPages/1",
     "selectedBitmapObject": "[temp-hum-dew-screen.eez-project]:/bitmaps/2",
     "subnavigationSelectedItems": {}
   },
@@ -187,7 +187,7 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 46.96264975334743,
+              "weight": 54.61294862772695,
               "selected": 1,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
@@ -207,10 +207,10 @@
                 {
                   "type": "tab",
                   "id": "#7db17e59-11ce-41dc-af3d-a0c0cf43ecc1",
-                  "name": "Main",
+                  "name": "Graph",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[temp-hum-dew-screen.eez-project]:/userPages/0",
+                    "objectPath": "[temp-hum-dew-screen.eez-project]:/userPages/1",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -221,7 +221,7 @@
             {
               "type": "row",
               "id": "#48923983-2168-44d1-b7e8-c46ea54eea19",
-              "weight": 38.03735024665257,
+              "weight": 30.387051372273046,
               "children": [
                 {
                   "type": "tabset",
@@ -990,8 +990,30 @@
       },
       "transform": {
         "translate": {
-          "x": -295.26953125,
-          "y": -154.2205810546875
+          "x": -160,
+          "y": -120
+        },
+        "scale": 1
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[temp-hum-dew-screen.eez-project]:/userPages/1[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {},
+          "1": {},
+          "6": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -160,
+          "y": -120
         },
         "scale": 1
       },
@@ -1015,9 +1037,14 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "KNOB",
+  "lvglPart": "MAIN",
   "lvglState": "DEFAULT",
-  "lvglExpandedPropertiesGroup": [],
+  "lvglExpandedPropertiesGroup": [
+    "POSITION AND SIZE",
+    "LAYOUT",
+    "LINE",
+    "TEXT"
+  ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
   "flowZoom": 1,

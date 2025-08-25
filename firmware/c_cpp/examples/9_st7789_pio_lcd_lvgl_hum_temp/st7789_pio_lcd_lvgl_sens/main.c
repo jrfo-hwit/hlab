@@ -120,6 +120,57 @@ void lv_port_display_init(void)
     lv_display_set_buffers(lcd_disp, buf1, buf2, buf_size, LV_DISPLAY_RENDER_MODE_PARTIAL);
 }
 
+// Function to get the current screen ID
+enum ScreensEnum get_current_screen_id(){   
+    if (objects.main && lv_obj_get_screen(objects.main) == lv_scr_act()) {
+        return SCREEN_ID_MAIN;
+    } else if (objects.graph && lv_obj_get_screen(objects.graph) == lv_scr_act()) {
+        return SCREEN_ID_GRAPH;
+    }
+    return SCREEN_ID_MAIN; // Default to main screen if none matches
+}
+
+enum scaleGraph {
+    SCALE_MINUTE = 1,
+    SCALE_HOUR = 2,
+    SCALE_DAY = 3,
+};
+
+#include <float.h>  // for FLT_MAX and FLT_MIN
+
+float array_max(const float *arr, size_t len) {
+    if (len == 0) return -FLT_MAX; // or handle error
+    float max_val = arr[0];
+    for (size_t i = 1; i < len; i++) {
+        if (arr[i] > max_val) {
+            max_val = arr[i];
+        }
+    }
+    return max_val;
+}
+
+float array_min(const float *arr, size_t len) {
+    if (len == 0) return FLT_MAX; // or handle error
+    float min_val = arr[0];
+    for (size_t i = 1; i < len; i++) {
+        if (arr[i] < min_val) {
+            min_val = arr[i];
+        }
+    }
+    return min_val;
+}
+
+float array_avg(const float *arr, size_t len) {
+    if (len == 0) return 0.0f;  // handle empty array case
+    float sum = 0.0f;
+    for (size_t i = 0; i < len; i++) {
+        sum += arr[i];
+    }
+    return sum / (float)len;
+}
+
+#define CHART_POINT_COUNT 48
+
 /**
  * @brief Entry point of the program.
  *
@@ -191,6 +242,13 @@ int main() {
 
     lv_arc_set_range(objects.temp_arc, -50, 100);
     lv_arc_set_range(objects.humd_arc, 0, 100);
+    
+    lv_chart_set_type(objects.chart, LV_CHART_TYPE_LINE);
+    lv_chart_series_t * ser1 = lv_chart_add_series(objects.chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
+    lv_chart_series_t * ser2 = lv_chart_add_series(objects.chart, lv_palette_main(LV_PALETTE_BLUE), LV_CHART_AXIS_SECONDARY_Y);
+    lv_chart_set_point_count(objects.chart, CHART_POINT_COUNT); // Set the number of points in the chart
+    lv_chart_set_range(objects.chart, LV_CHART_AXIS_PRIMARY_Y, -50, 100); // Set range for temperature
+    lv_chart_set_range(objects.chart, LV_CHART_AXIS_SECONDARY_Y, 0, 100); // Set range for humidity
 
     while(1) {
         temperature = GetTemperature();
@@ -282,31 +340,85 @@ int main() {
             lv_obj_set_style_bg_color(objects.humd_arc, lv_color_hex(0x00FF00), LV_PART_KNOB); // Set green color for normal humidity
         }
 
-        // Update the UI based on button presses
-        // if (btna == true || btnb == true) 
-        // {
-        //     if (btna == true && btnb == false) // If only Button A is pressed
-        //     {
-        //         if (slider_value < 0) { // If slider value is less than 0, reset it to 0
-        //             slider_value = 0;
-        //         } else { // If slider value is greater than or equal to 0, decrease it by 5
-        //             slider_value -= 5; // Decrease slider value by 5
-        //         }
-        //     }
-        //     if(btna==false && btnb == true) // If only Button B is pressed
-        //     {
-        //         if (slider_value > 100) { // If slider value is greater than 100, reset it to 100
-        //             slider_value = 100; // Reset slider value to 100
-        //         } else {
-        //             slider_value += 5; // Increase slider value by 5
-        //         }
-        //     }
-        //     if (now - last_btn_pressed_time > 100000) // If more than 100 ms has passed since the last button press 100,000 us = 100ms
-        //     { 
-        //         lv_arc_set_value(GUI_Arc__screen1__tempArc, slider_value); // Set the slider value without animation
-        //         last_btn_pressed_time = now; // Update the last button pressed time
-        //     }
-        // }
+        // Update the UI screens based on button presses
+        if (btna == true || btnb == true) 
+        {
+            enum ScreensEnum current_screen = get_current_screen_id(); // Get the active screen from the LVGL display
+
+            if (btna == true && btnb == false && (current_screen == SCREEN_ID_GRAPH)) // If only Button A is pressed @ SCREEN_ID_GRAPH
+            {
+                loadScreen(SCREEN_ID_MAIN); // Load the main screen
+            }
+            if (btna == false && btnb == true && (current_screen == SCREEN_ID_GRAPH)) // If only Button B is pressed @ SCREEN_ID_GRAPH
+            {
+                // change the scale of the graph
+            }
+            if(btna==false && btnb == true && (current_screen == SCREEN_ID_MAIN)) // If only Button B is pressed @ SCREEN_ID_MAIN
+            {
+                loadScreen(SCREEN_ID_GRAPH); // Load the graph screen
+            }
+            if (now - last_btn_pressed_time > 100000) // If more than 100 ms has passed since the last button press 100,000 us = 100ms
+            { 
+                last_btn_pressed_time = now; // Update the last button pressed time
+            }
+        }
+
+        enum scaleGraph scale_graph = SCALE_MINUTE; // Scale graph to fit temperature and humidity values 0=minute, 1=hour, 2=day
+
+        // Circular buffers for temperature and humidity
+        static float temp_buffer[CHART_POINT_COUNT] = {25.0f}; // Initialize with a default value
+        static float humd_buffer[CHART_POINT_COUNT] = {50.0f}; // Initialize with a default value
+        float temp_max, temp_min, humd_max, humd_min, temp_avg, humd_avg;
+        static int buffer_index = 0, percentage_to_30min=0;
+        static absolute_time_t last_sample_time = 0, last_sample_time2 = 0;
+
+        // Sample every 30 minutes (30min * 60sec * 1,000,000us = 1,800,000,000us)
+        if (absolute_time_diff_us(last_sample_time, now) >= (30*60*1000000)) { // 30min * 60sec * 1sec = 1,000,000 us
+            temp_buffer[buffer_index] = temperature;
+            humd_buffer[buffer_index] = humidity;
+            buffer_index = (buffer_index + 1) % CHART_POINT_COUNT;
+            last_sample_time = now;
+
+            // Calculate max, min, and average values
+            temp_max = array_max(temp_buffer, sizeof(temp_buffer)/sizeof(temp_buffer[0]));
+            temp_min = array_min(temp_buffer, sizeof(temp_buffer)/sizeof(temp_buffer[0]));
+            temp_avg = array_avg(temp_buffer, sizeof(temp_buffer)/sizeof(temp_buffer[0]));
+            humd_max = array_max(humd_buffer, sizeof(humd_buffer)/sizeof(humd_buffer[0]));
+            humd_min = array_min(humd_buffer, sizeof(humd_buffer)/sizeof(humd_buffer[0]));
+            humd_avg = array_avg(humd_buffer, sizeof(humd_buffer)/sizeof(humd_buffer[0]));
+
+            // Update chart ranges based on min and max values
+            lv_chart_set_range(objects.chart, LV_CHART_AXIS_PRIMARY_Y, temp_min-1, temp_max+1); // Set range for temperature
+            lv_chart_set_range(objects.chart, LV_CHART_AXIS_SECONDARY_Y, humd_min-1, humd_max+1); // Set range for humidity
+            
+            // Update labels with min, max, and average values
+            sprintf(temp_str, "%0.0fC", temp_min-1);
+            lv_label_set_text(objects.min_temp_chart, temp_str);
+            sprintf(temp_str, "%0.0fC", temp_max+1);
+            lv_label_set_text(objects.max_temp_chart, temp_str);
+            sprintf(temp_str, "%0.0fC", temp_avg);
+            lv_label_set_text(objects.mid_temp_chart, temp_str);
+            sprintf(humd_str, "%0.0f%%", humd_min-1);
+            lv_label_set_text(objects.min_hum_chart, humd_str);
+            sprintf(humd_str, "%0.0f%%", humd_max+1);
+            lv_label_set_text(objects.max_hum_chart, humd_str);
+            sprintf(humd_str, "%0.0f%%", humd_avg);
+            lv_label_set_text(objects.mid_hum_chart, humd_str);
+
+            lv_label_set_text(objects.scale_change, "24h@1p/30m");
+
+            // Update the chart with new values
+            lv_chart_set_next_value(objects.chart, ser1, temperature);
+            lv_chart_set_next_value(objects.chart, ser2, humidity);
+            percentage_to_30min=0;
+        }
+        else if(absolute_time_diff_us(last_sample_time2, now) >= (30*60*1000000/100)) // Update every 18 seconds for smoother chart update
+        {
+            percentage_to_30min++;
+            sprintf(humd_str, "%d%%", percentage_to_30min);
+            lv_label_set_text(objects.percentage_to_30min_label, humd_str);
+            last_sample_time2 = now;
+        }
 
         lv_task_handler(); // Handle LVGL tasks
         sleep_ms(10); // Sleep to allow other tasks to run

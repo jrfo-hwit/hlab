@@ -11,7 +11,7 @@
 #elif defined(LV_BUILD_TEST)
 #include "../lvgl.h"
 #else
-#include "../lvgl/lvgl.h" // Include LVGL header for UI events
+#include "../lvgl/lvgl.h" //changed from "lvgl/lvgl.h"
 #endif
 
 
