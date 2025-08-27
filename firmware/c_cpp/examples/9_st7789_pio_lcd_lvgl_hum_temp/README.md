@@ -36,7 +36,7 @@
 - AHT10 sensor module (visible on left)
 - Integrated joysticks and navigation buttons
 - Compact form factor suitable for embedded applications
-- 
+
 <img src="IMG_2977.jpg" width=75% height=75%>
 
 A real-time environmental monitoring system built with Raspberry Pi Pico W, featuring a 2-inch ST7789 LCD display with LVGL GUI designed in EEZ Studio. The system displays the HWIT (Hardware Innovation Technologies) branding and provides professional-grade environmental monitoring.
