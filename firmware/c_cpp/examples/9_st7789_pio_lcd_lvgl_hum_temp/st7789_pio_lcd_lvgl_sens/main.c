@@ -44,6 +44,8 @@ absolute_time_t last_debounce_time_b;
 static critical_section_t crit_sec = {0}; //< Synchronization for safe time reading
 static lv_display_t * lcd_disp = NULL; //< Pointer to the LVGL display object
 
+#define DEMO_MODE 1
+
 /**
  * Retrieves the number of milliseconds elapsed since the system booted.
  * NEEDED BY LVGL FOR TICK HANDLING.
@@ -250,6 +252,47 @@ int main() {
     lv_chart_set_range(objects.chart, LV_CHART_AXIS_PRIMARY_Y, -50, 100); // Set range for temperature
     lv_chart_set_range(objects.chart, LV_CHART_AXIS_SECONDARY_Y, 0, 100); // Set range for humidity
 
+    // Initialize chart with default values
+    int i;
+    for (i = 0; i < CHART_POINT_COUNT; i++) {
+        lv_chart_set_next_value(objects.chart, ser1, 25); // Initialize temperature series with 25C
+        lv_chart_set_next_value(objects.chart, ser2, 50); // Initialize humidity series with 50%
+    }
+    // Circular buffers for temperature and humidity
+    static float temp_buffer[CHART_POINT_COUNT]; 
+    static float humd_buffer[CHART_POINT_COUNT];
+    // Initialize with a default value
+    for (i=0; i<CHART_POINT_COUNT; i++) {
+        temp_buffer[i] = 25.0f;
+        humd_buffer[i] = 50.0f;
+    }
+
+    float temp_max, temp_min, humd_max, humd_min, temp_avg, humd_avg;
+    // Calculate max, min, and average values
+    temp_max = array_max(temp_buffer, sizeof(temp_buffer)/sizeof(temp_buffer[0]));
+    temp_min = array_min(temp_buffer, sizeof(temp_buffer)/sizeof(temp_buffer[0]));
+    temp_avg = array_avg(temp_buffer, sizeof(temp_buffer)/sizeof(temp_buffer[0]));
+    humd_max = array_max(humd_buffer, sizeof(humd_buffer)/sizeof(humd_buffer[0]));
+    humd_min = array_min(humd_buffer, sizeof(humd_buffer)/sizeof(humd_buffer[0]));
+    humd_avg = array_avg(humd_buffer, sizeof(humd_buffer)/sizeof(humd_buffer[0]));
+    // Update chart ranges based on min and max values
+    lv_chart_set_range(objects.chart, LV_CHART_AXIS_PRIMARY_Y, temp_min-1, temp_max+1); // Set range for temperature
+    lv_chart_set_range(objects.chart, LV_CHART_AXIS_SECONDARY_Y, humd_min-1, humd_max+1); // Set range for humidity
+    // Update labels with min, max, and average values
+    char temp_str[10], humd_str[10],dew_str[10];
+    sprintf(temp_str, "%0.0fC", temp_min-1);
+    lv_label_set_text(objects.min_temp_chart, temp_str);
+    sprintf(temp_str, "%0.0fC", temp_max+1);
+    lv_label_set_text(objects.max_temp_chart, temp_str);
+    sprintf(temp_str, "%0.0fC", temp_avg);
+    lv_label_set_text(objects.mid_temp_chart, temp_str);
+    sprintf(humd_str, "%0.0f%%", humd_min-1);
+    lv_label_set_text(objects.min_hum_chart, humd_str);
+    sprintf(humd_str, "%0.0f%%", humd_max+1);
+    lv_label_set_text(objects.max_hum_chart, humd_str);
+    sprintf(humd_str, "%0.0f%%", humd_avg);
+    lv_label_set_text(objects.mid_hum_chart, humd_str);
+
     while(1) {
         temperature = GetTemperature();
         humidity= GetHumidity();
@@ -259,7 +302,7 @@ int main() {
         bool btna, current_state_a = gpio_get(BUTTON_A_PIN); // Button A state
         bool btnb, current_state_b = gpio_get(BUTTON_B_PIN); // Button B state
         
-        char temp_str[10],humd_str[10],dew_str[10];
+
         sprintf(temp_str, "%0.1fC", temperature);
         sprintf(humd_str, "%0.1f%%", humidity);
         sprintf(dew_str, "%0.1fC", dew);
@@ -364,13 +407,12 @@ int main() {
         }
 
         enum scaleGraph scale_graph = SCALE_MINUTE; // Scale graph to fit temperature and humidity values 0=minute, 1=hour, 2=day
-
-        // Circular buffers for temperature and humidity
-        static float temp_buffer[CHART_POINT_COUNT] = {25.0f}; // Initialize with a default value
-        static float humd_buffer[CHART_POINT_COUNT] = {50.0f}; // Initialize with a default value
-        float temp_max, temp_min, humd_max, humd_min, temp_avg, humd_avg;
         static int buffer_index = 0, percentage_to_30min=0;
         static absolute_time_t last_sample_time = 0, last_sample_time2 = 0;
+        
+        #ifdef DEMO_MODE
+            static absolute_time_t last_sample_time3 = 0;
+        #endif
 
         // Sample every 30 minutes (30min * 60sec * 1,000,000us = 1,800,000,000us)
         if (absolute_time_diff_us(last_sample_time, now) >= (30*60*1000000)) { // 30min * 60sec * 1sec = 1,000,000 us
@@ -420,6 +462,21 @@ int main() {
             last_sample_time2 = now;
         }
 
+        #ifdef DEMO_MODE
+            // In demo mode, switch screens every 7 seconds
+            enum ScreensEnum current_screen_demo = get_current_screen_id(); // Get the active screen from the LVGL display
+            if (absolute_time_diff_us(last_sample_time3, now) >= 7000000) { // 7 seconds
+                if(current_screen_demo == SCREEN_ID_GRAPH)
+                {
+                    loadScreen(SCREEN_ID_MAIN); // Load the main screen
+                }
+                else
+                {
+                    loadScreen(SCREEN_ID_GRAPH); // Load the graph screen
+                }
+                last_sample_time3 = now;
+            }   
+        #endif
         lv_task_handler(); // Handle LVGL tasks
         sleep_ms(10); // Sleep to allow other tasks to run
     }
